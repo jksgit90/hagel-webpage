@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:  #0a0908;
+  --fg:  #f0ede7;
+  --dim: #3a3530;
+  --mid: rgba(240, 237, 231, 0.52);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+  filter: grayscale(100%);
+}
+
+img.graphic-color {
+  filter: none;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 2rem;
+  pointer-events: none;
+}
+
+nav a { pointer-events: auto; }
+
+.nav-mark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.nav-end {
+  display: flex;
+  gap: 2rem;
+  mix-blend-mode: difference;
+}
+
+.nav-end a {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* ── ENTRY ───────────────────────────────────────── */
+.entry {
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 2.5rem 2.5rem;
+}
+
+/* Gradient overlay */
+.entry::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10,9,8,0.75) 0%, rgba(10,9,8,0.1) 50%, transparent 100%),
+    linear-gradient(to right, rgba(10,9,8,0.5) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.entry-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Cover trick: oversizes the 16:9 iframe to fill any viewport ratio */
+.entry-video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100%, calc(100svh * 16 / 9));
+  height: max(100%, calc(100svw * 9 / 16));
+  border: 0;
+  pointer-events: none;
+}
+
+.entry-logo {
+  position: absolute;
+  bottom: 3vh;
+  left: 2rem;
+  width: min(52vw, 560px);
+  filter: invert(1);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+}
+
+/* Small city label, bottom-center */
+.entry-foot {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 0.55rem;
+  letter-spacing: 0.48em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 231, 0.35);
+  white-space: nowrap;
+}
+
+/* ── REVEAL ──────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── IMAGE BLOCKS ────────────────────────────────── */
+
+.f-full {
+  width: 100%;
+  height: 72vh;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.f-full img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.f-right {
+  width: 65%;
+  margin-left: auto;
+  margin-top: 4px;
+}
+
+.f-left {
+  width: 52%;
+  margin-left: 2.5rem;
+  margin-top: 4px;
+}
+
+.f-pair {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.f-pair figure {
+  overflow: hidden;
+}
+
+.f-pair img {
+  height: 56vh;
+  object-fit: cover;
+}
+
+.f-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.f-split figure {
+  overflow: hidden;
+}
+
+.f-split img {
+  height: 52vh;
+  object-fit: cover;
+}
+
+.f-triple {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 2fr;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.f-triple figure {
+  overflow: hidden;
+}
+
+.f-triple img {
+  height: 44vh;
+  object-fit: cover;
+}
+
+/* ── TEXT ────────────────────────────────────────── */
+.f-text {
+  padding: 7rem 2.5rem 6rem;
+  max-width: 680px;
+  margin-left: auto;
+}
+
+.f-text p {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.85;
+  color: var(--mid);
+}
+
+.f-text p + p { margin-top: 1.5rem; }
+
+.f-text-em { font-style: italic; }
+
+/* ── EMBED ───────────────────────────────────────── */
+.f-embed {
+  padding: 5rem 2.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+/* ── SHORTS ──────────────────────────────────────── */
+.f-shorts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.short-wrap {
+  position: relative;
+  aspect-ratio: 9/16;
+}
+
+.short-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── GRAPHIC BLOCKS ──────────────────────────────── */
+
+.f-hagelblod {
+  padding: 6rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.f-hagelblod img {
+  width: 80%;
+  max-width: 900px;
+  filter: none;
+}
+
+.f-single-art {
+  width: min(28vw, 280px);
+  margin-left: 2.5rem;
+  margin-top: 4px;
+  transform: rotate(-2deg);
+}
+
+.f-single-art img {
+  filter: none;
+}
+
+/* ── TRACKS ──────────────────────────────────────── */
+.f-tracks {
+  padding: 0 2.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── CONTACT ─────────────────────────────────────── */
+.f-contact {
+  padding: 10rem 2.5rem 7rem;
+  text-align: center;
+}
+
+.contact-pre {
+  font-size: 0.58rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 2.5rem;
+}
+
+.contact-email {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  transition: opacity 0.15s;
+  margin-bottom: 3rem;
+}
+
+.contact-email:hover { opacity: 0.4; }
+
+.contact-social {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.contact-social a {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  transition: color 0.15s;
+}
+
+.contact-social a:hover { color: var(--fg); }
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--dim);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 0.9rem 1.5rem; }
+  .nav-end { gap: 1.5rem; }
+  .entry { padding: 0 1.5rem 2rem; }
+  .f-text { padding: 5rem 1.5rem 4rem; margin-left: 0; max-width: none; }
+  .f-embed { padding: 4rem 1.5rem; }
+  .f-video { padding: 4rem 1.5rem; }
+  .f-right { width: 80%; }
+  .f-left  { width: 72%; margin-left: 1.5rem; }
+  .f-shorts { grid-template-columns: repeat(2, 1fr); }
+  .f-single-art { width: min(40vw, 280px); }
+}
+
+@media (max-width: 560px) {
+  .nav-end { display: none; }
+  .f-right { width: 100%; }
+  .f-left  { width: 100%; margin-left: 0; }
+  .f-pair  { grid-template-columns: 1fr; }
+  .f-pair  figure:last-child { display: none; }
+  .f-split { grid-template-columns: 1fr; }
+  .f-split figure:last-child { display: none; }
+  .f-triple { grid-template-columns: 1fr 1fr; }
+  .f-triple figure:last-child { display: none; }
+  .f-shorts { grid-template-columns: 1fr 1fr; }
+  .f-full { height: 55vw; }
+  .f-single-art { width: min(55vw, 240px); }
+  .contact-email { font-size: clamp(1.4rem, 6vw, 2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
