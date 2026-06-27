@@ -22,23 +22,19 @@
 </nav>
 
 <div class="entry" id="top">
-  <div class="entry-video-bg">
-    <iframe
-      src="https://www.youtube.com/embed/9jWhLZlINGQ?autoplay=1&loop=1&playlist=9jWhLZlINGQ&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&showinfo=0"
-      title="Hagel"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      loading="eager"
-    ></iframe>
-  </div>
+  <img class="entry-bg" src="assets/images/hagel_band_utomhus_02.webp" alt="" aria-hidden="true" />
   <img class="entry-logo" src="assets/grahpic/ella_moln_text.PNG" alt="Hagel" />
-  <p class="entry-foot">Göteborg</p>
+  <p class="entry-tagline">Indie från Göteborg</p>
 </div>
 
 <div class="flow">
 
-  <figure class="f-full reveal">
-    <img class="graphic-color" src="assets/images/hagel_band_utomhus_01.webp" alt="Hagel" loading="eager" />
-  </figure>
+  <div class="f-video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="assets/video/Hagel_Yakida_webb.webm" type="video/webm" />
+      <source src="assets/video/Hagel_Yakida_webb.mp4" type="video/mp4" />
+    </video>
+  </div>
 
   <div class="f-text reveal">
     <p>
@@ -83,15 +79,19 @@
 
   <div class="f-pair reveal">
     <figure>
-      <img src="assets/images/hagel_band_utomhus_02.webp" alt="Hagel" loading="lazy" />
+      <img src="assets/images/hagel_band_utomhus_01.webp" alt="Hagel" loading="lazy" />
     </figure>
     <figure>
       <img class="graphic-color" src="assets/images/hagel_band_inomhus_kok_01.webp" alt="Hagel" loading="lazy" />
     </figure>
   </div>
 
-  <div class="f-hagelblod reveal">
-    <img class="graphic-color" src="assets/grahpic/hagelblod_01.png" alt="Hagel" loading="lazy" />
+  <div class="f-hagelblod reveal" aria-label="Hagel">
+    <div class="hb-char hb-1"></div>
+    <div class="hb-char hb-2"></div>
+    <div class="hb-char hb-3"></div>
+    <div class="hb-char hb-4"></div>
+    <div class="hb-char hb-5"></div>
   </div>
 
   <div class="f-embed reveal">
@@ -186,7 +186,8 @@
 </footer>
 
 <script>
-  const io = new IntersectionObserver(
+
+const io = new IntersectionObserver(
     (entries) => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     }),
