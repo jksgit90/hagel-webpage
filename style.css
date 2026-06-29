@@ -126,7 +126,7 @@ nav a:focus-visible {
   position: absolute;
   bottom: 2.5rem;
   left: 2rem;
-  width: min(52vw, 560px);
+  width: clamp(120px, 38vw, 520px);
   filter: invert(1);
   mix-blend-mode: screen;
   pointer-events: none;
@@ -481,7 +481,7 @@ footer {
   .head-anchor { display: none; }
   .head-strip { display: grid; }
   .entry { height: 65svh; }
-  .entry-logo { left: -1rem; bottom: 1rem; width: min(60vw, 300px); }
+  .entry-logo { left: -1rem; bottom: 1rem; }
   .entry-tagline { bottom: 1rem; right: 1.5rem; }
   .f-right { width: 100%; }
   .f-left  { width: 100%; margin-left: 0; }
