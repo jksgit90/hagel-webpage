@@ -451,6 +451,12 @@ footer {
   .nav-icon { display: block; }
   .nav-end a { padding: 0.55rem 0.6rem; }
   .head-anchor { display: none; }
+  .entry-bg { object-position: 30% center; }
+  .entry-logo {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(72vw, 360px);
+  }
   .f-right { width: 100%; }
   .f-left  { width: 100%; margin-left: 0; }
   .f-pair  { grid-template-columns: 1fr; }
