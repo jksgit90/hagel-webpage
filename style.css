@@ -320,9 +320,20 @@ nav a:focus-visible {
 .head-strip img {
   width: 100%;
   filter: none;
-  transform: rotate(var(--rot, 0deg));
   transform-origin: bottom center;
+  animation: headBob 3s ease-in-out infinite;
 }
+
+@keyframes headBob {
+  0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0); }
+  50%       { transform: rotate(var(--rot, 0deg)) translateY(-6px); }
+}
+
+.head-strip img:nth-child(1) { animation-delay: 0s; }
+.head-strip img:nth-child(2) { animation-delay: 0.5s; }
+.head-strip img:nth-child(3) { animation-delay: 1s; }
+.head-strip img:nth-child(4) { animation-delay: 0.25s; }
+.head-strip img:nth-child(5) { animation-delay: 0.75s; }
 
 /* ── FLOATING HEADS ──────────────────────────────── */
 
@@ -489,4 +500,5 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .head-float { opacity: 1; animation: none; }
+  .head-strip img { animation: none; }
 }
