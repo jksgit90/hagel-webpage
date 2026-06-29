@@ -307,6 +307,23 @@ nav a:focus-visible {
   border: 0;
 }
 
+/* ── HEAD STRIP (mobile) ─────────────────────────── */
+.head-strip {
+  display: none;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: flex-end;
+  gap: 0;
+  padding: 2rem 0 1rem;
+  overflow: hidden;
+}
+
+.head-strip img {
+  width: 100%;
+  filter: none;
+  transform: rotate(var(--rot, 0deg));
+  transform-origin: bottom center;
+}
+
 /* ── FLOATING HEADS ──────────────────────────────── */
 
 .head-anchor {
@@ -451,6 +468,7 @@ footer {
   .nav-icon { display: block; }
   .nav-end a { padding: 0.55rem 0.6rem; }
   .head-anchor { display: none; }
+  .head-strip { display: grid; }
   .entry { height: 65svh; }
   .entry-logo { left: -1rem; bottom: 1rem; width: min(60vw, 300px); }
   .entry-tagline { bottom: 1rem; right: 1.5rem; }
