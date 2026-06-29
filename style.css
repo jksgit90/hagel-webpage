@@ -126,7 +126,7 @@ nav a:focus-visible {
   position: absolute;
   bottom: 2.5rem;
   left: 2rem;
-  width: clamp(120px, 38vw, 520px);
+  width: clamp(130px, 42vw, 520px);
   filter: invert(1);
   mix-blend-mode: screen;
   pointer-events: none;
