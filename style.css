@@ -122,6 +122,10 @@ nav a:focus-visible {
   z-index: 0;
 }
 
+.entry-logo-wrap {
+  display: contents;
+}
+
 .entry-logo {
   position: absolute;
   bottom: 2.5rem;
