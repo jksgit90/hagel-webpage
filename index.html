@@ -140,11 +140,11 @@
     <img class="graphic-color" src="assets/images/Hagel-WineMech-Jan2026-3.jpg" alt="Hagel live" loading="lazy" />
   </figure>
 
-  <div class="f-pair reveal">
-    <figure>
+  <div class="f-pair">
+    <figure class="reveal">
       <img src="assets/images/hagel_band_utomhus_01.webp" alt="Hagel" loading="lazy" />
     </figure>
-    <figure>
+    <figure class="reveal">
       <img class="graphic-color" src="assets/images/hagel_band_inomhus_kok_01.webp" alt="Hagel" loading="lazy" />
     </figure>
   </div>
@@ -171,11 +171,11 @@
          data-parallax="-0.08" style="--rot: -5deg" alt="" aria-hidden="true">
   </div>
 
-  <div class="f-split reveal">
-    <figure>
+  <div class="f-split">
+    <figure class="reveal">
       <img src="assets/images/hagel_studio_01.webp" alt="Hagel studio" loading="lazy" />
     </figure>
-    <figure>
+    <figure class="reveal">
       <img src="assets/images/hagel_01.webp" alt="Hagel" loading="lazy" />
     </figure>
   </div>
@@ -220,14 +220,14 @@
     </p>
   </div>
 
-  <div class="f-triple reveal">
-    <figure>
+  <div class="f-triple">
+    <figure class="reveal">
       <img class="graphic-color" src="assets/images/Hagel-WineMech-Jan2026-2.jpg" alt="Hagel live" loading="lazy" />
     </figure>
-    <figure>
+    <figure class="reveal">
       <img src="assets/images/hagel_band_inomhus_kok_04.webp" alt="Hagel" loading="lazy" />
     </figure>
-    <figure>
+    <figure class="reveal">
       <img src="assets/images/Hagel-WineMech-Jan2026-4.jpg" alt="Hagel live" loading="lazy" />
     </figure>
   </div>
@@ -263,6 +263,44 @@ const io = new IntersectionObserver(
   { threshold: 0.08 }
 );
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Pause head-strip bobbing animation when offscreen (mobile only, saves battery)
+const headStripImgs = document.querySelectorAll('.head-strip img');
+if (headStripImgs.length) {
+  const stripIo = new IntersectionObserver(
+    (entries) => entries.forEach(e => e.target.classList.toggle('vis', e.isIntersecting)),
+    { threshold: 0.01 }
+  );
+  headStripImgs.forEach(el => stripIo.observe(el));
+}
+
+// Ensure background video actually plays (autoplay is unreliable in some browsers)
+document.querySelectorAll('.f-video-bg video').forEach(video => {
+  const tryPlay = () => {
+    const p = video.play();
+    if (p !== undefined) {
+      p.catch(() => {
+        const resume = () => { video.play(); cleanup(); };
+        const cleanup = () => {
+          document.removeEventListener('touchstart', resume);
+          document.removeEventListener('scroll', resume);
+        };
+        document.addEventListener('touchstart', resume, { once: true, passive: true });
+        document.addEventListener('scroll', resume, { once: true, passive: true });
+      });
+    }
+  };
+
+  if (video.readyState >= 3) {
+    tryPlay();
+  } else {
+    video.addEventListener('canplay', tryPlay, { once: true });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && video.paused) tryPlay();
+  });
+});
 
 // Floating heads — parallax + reveal, throttled via rAF
 const headEls = Array.from(document.querySelectorAll('[data-parallax]'));
