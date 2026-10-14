@@ -194,6 +194,77 @@ nav a:focus-visible {
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 
+/* ── RELEASE BAR ─────────────────────────────────── */
+.release {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.9rem 2.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(242, 243, 244, 0.12);
+}
+
+.release[hidden] { display: none; }
+
+.release-cover {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  filter: none;
+  object-fit: cover;
+}
+
+.release-info { min-width: 0; }
+
+.release-title,
+.release-count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  color: var(--fg);
+}
+
+.release-count {
+  margin-left: auto;
+  display: flex;
+  gap: 1.1rem;
+}
+
+.release-count b { font-weight: 400; margin-right: 0.1rem; }
+
+.release-btn {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--fg);
+  padding: 0.95rem 1.5rem;
+  border: 1px solid var(--fg);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.release-btn:hover { background: transparent; color: var(--fg); }
+.release-btn:focus-visible { outline: 2px solid #F2F3F4; outline-offset: 4px; }
+.release-count:empty { display: none; }
+.release-count:empty + .release-btn { margin-left: auto; }
+
+@media (max-width: 900px) {
+  .release { padding: 0.9rem 1.5rem; }
+  .release-title, .release-count { font-size: 1.9rem; }
+}
+
+@media (max-width: 560px) {
+  .release { flex-wrap: wrap; gap: 0.6rem 1rem; padding: 1rem 1.25rem; }
+  .release-cover { width: 72px; height: 72px; }
+  .release-info { flex: 1; }
+  .release-title, .release-count { font-size: 1.6rem; }
+  .release-info { flex-basis: calc(100% - 72px - 1rem); }
+  .release-count { order: 3; margin-left: 0; }
+  .release-btn { order: 4; margin-left: auto; padding: 0.8rem 1.2rem; }
+}
+
 /* ── REVEAL ──────────────────────────────────────── */
 .reveal {
   opacity: 0;

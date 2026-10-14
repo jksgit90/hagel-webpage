@@ -80,6 +80,15 @@
   <p class="entry-tagline">Indie från Göteborg</p>
 </div>
 
+<aside class="release" id="release" aria-label="Ny låt">
+  <img class="release-cover" src="assets/images/release-cover.jpg" width="160" height="160" alt="Omslag: Människor — Hagel" />
+  <div class="release-info">
+    <p class="release-title" id="release-title">Människor – Ny låt 22 okt</p>
+  </div>
+  <p class="release-count" id="release-count" aria-hidden="true"></p>
+  <a class="release-btn" id="release-btn" href="https://open.spotify.com/artist/0cJkock96R16EJwqNdNcrC" target="_blank" rel="noopener">Spotify</a>
+</aside>
+
 <div class="flow">
 
   <div class="f-video-bg">
@@ -256,7 +265,35 @@
 </footer>
 
 <script>
-const io = new IntersectionObserver(
+// Release bar: Människor, 22 okt 2026 00:00 svensk tid. Döljs 30 dagar efter släpp.
+(function () {
+  const bar = document.getElementById('release');
+  if (!bar) return;
+  const RELEASE = new Date('2026-10-22T00:00:00+02:00').getTime();
+  const HIDE_AFTER = RELEASE + 30 * 864e5;
+  const title = document.getElementById('release-title');
+  const count = document.getElementById('release-count');
+  const btn = document.getElementById('release-btn');
+  const override = new URLSearchParams(location.search).get('now');
+  function render() {
+    const now = override ? new Date(override).getTime() : Date.now();
+    if (now >= HIDE_AFTER) { bar.hidden = true; return; }
+    if (now >= RELEASE) {
+      title.textContent = 'Människor – Ute nu';
+      count.textContent = '';
+      btn.textContent = 'Lyssna nu';
+      return;
+    }
+    const m = Math.floor((RELEASE - now) / 6e4);
+    const d = Math.floor(m / 1440), h = Math.floor(m % 1440 / 60), mi = m % 60;
+    count.innerHTML = '<span><b>' + d + '</b>d</span><span><b>' + h + '</b>t</span><span><b>' + mi + '</b>m</span>';
+    btn.textContent = 'Spotify';
+  }
+  render();
+  setInterval(render, 30000);
+})();
+
+const io =new IntersectionObserver(
   (entries) => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
   }),
