@@ -282,6 +282,8 @@
       title.textContent = 'Människor – Ute nu';
       count.textContent = '';
       btn.textContent = 'Lyssna nu';
+      btn.href = '/manniskor/';
+      btn.removeAttribute('target');
       return;
     }
     const m = Math.floor((RELEASE - now) / 6e4);
