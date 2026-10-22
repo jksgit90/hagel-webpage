@@ -256,13 +256,12 @@ nav a:focus-visible {
 }
 
 @media (max-width: 560px) {
-  .release { flex-wrap: wrap; gap: 0.6rem 1rem; padding: 1rem 1.25rem; }
-  .release-cover { width: 72px; height: 72px; }
-  .release-info { flex: 1; }
-  .release-title, .release-count { font-size: 1.6rem; }
-  .release-info { flex-basis: calc(100% - 72px - 1rem); }
-  .release-count { order: 3; margin-left: 0; }
-  .release-btn { order: 4; margin-left: auto; padding: 0.8rem 1.2rem; }
+  .release { flex-direction: column; align-items: stretch; text-align: center; gap: 0.9rem; padding: 1.5rem 1.25rem; }
+  .release-cover { width: 120px; height: 120px; align-self: center; }
+  .release-info { flex: none; }
+  .release-title, .release-count { font-size: 1.8rem; }
+  .release-count { margin-left: 0; justify-content: center; }
+  .release-btn, .release-count:empty + .release-btn { margin-left: 0; text-align: center; padding: 0.9rem 1.2rem; }
 }
 
 /* ── REVEAL ──────────────────────────────────────── */
