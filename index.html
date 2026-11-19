@@ -49,6 +49,34 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Agnes Matsdotter + Hagel",
+    "startDate": "2026-12-09",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Skeppet",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Stigbergstorget",
+        "addressLocality": "Göteborg",
+        "addressCountry": "SE"
+      }
+    },
+    "performer": [
+      { "@type": "MusicGroup", "name": "Agnes Matsdotter" },
+      { "@type": "MusicGroup", "name": "Hagel", "url": "https://hagelgbg.se/" }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "url": "https://www.skeppetgbg.se/?tribe_events=agnes-matsdotter"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -110,6 +138,20 @@
       vägarbeten och Broder Daniel.
     </p>
   </div>
+
+  <section class="f-gigs reveal" id="spelningar" aria-labelledby="gigs-title">
+    <h2 class="gigs-pre" id="gigs-title">Spelningar</h2>
+    <ul class="gigs-list">
+      <li class="gig" data-date="2026-12-09">
+        <time class="gig-date" datetime="2026-12-09">9 dec</time>
+        <div class="gig-info">
+          <p class="gig-venue">Skeppet</p>
+          <p class="gig-meta">Stigbergstorget, Göteborg · Förband till Agnes Matsdotter</p>
+        </div>
+        <a class="gig-btn" href="https://www.skeppetgbg.se/?tribe_events=agnes-matsdotter" target="_blank" rel="noopener">Biljetter</a>
+      </li>
+    </ul>
+  </section>
 
   <figure class="f-single-art reveal">
     <img class="graphic-color" src="assets/grahpic/glom_mig_langsamt.png" alt="Glöm mig långsamt — Hagel" loading="lazy" />
@@ -265,6 +307,15 @@
 </footer>
 
 <script>
+// Spelningar: dölj passerade datum, och hela sektionen om inga finns kvar.
+(function () {
+  const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+  const gigs = document.querySelectorAll('.gig[data-date]');
+  let left = 0;
+  gigs.forEach(g => { if (g.dataset.date < today) g.remove(); else left++; });
+  if (!left) document.getElementById('spelningar')?.remove();
+})();
+
 // Release bar: Människor, 22 okt 2026 00:00 svensk tid. Döljs 30 dagar efter släpp.
 (function () {
   const bar = document.getElementById('release');
